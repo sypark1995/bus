@@ -3,6 +3,10 @@ plugins {
     id 'org.jetbrains.kotlin.android'
 }
 
+Properties properties = new Properties()
+properties.load(project.rootProject.file('local.properties').newDataInputStream())
+def google_map_api_key = properties.getProperty('google_api_key')
+
 android {
     namespace 'com.sypark.bus'
     compileSdk 32
@@ -15,6 +19,12 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        // google map api key 변수 지정
+        buildConfigField "String", "GOOGLE_API_KEY", google_map_api_key
+
+        //manifest에서 변수 접근 가능하도록
+        manifestPlaceholders = [googleApiKey: google_map_api_key]
     }
 
     buildTypes {
@@ -42,6 +52,7 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
 
+    implementation 'com.google.android.libraries.mapsplatform.secrets-gradle-plugin:secrets-gradle-plugin:2.0.1'
     // google map
     implementation 'com.google.android.gms:play-services-location:21.0.1'
     implementation 'com.google.android.gms:play-services-maps:18.1.0'
