@@ -33,6 +33,7 @@
                 android:value="" />
         </activity>
         <activity android:name=".SecondActivity"/>
+        <activity android:name=".MainActivity"/>
     </application>
 
 </manifest>

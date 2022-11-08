@@ -25,7 +25,7 @@ class IntroActivity : AppCompatActivity() {
 //        mapFragment.getMapAsync(this)
         lifecycleScope.launch {
             delay(2000)
-            val intent = Intent(this@IntroActivity,SecondActivity::class.java)
+            val intent = Intent(this@IntroActivity,MainActivity::class.java)
             startActivity(intent)
         }
     }
