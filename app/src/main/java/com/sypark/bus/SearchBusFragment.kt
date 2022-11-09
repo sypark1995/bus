@@ -1,19 +1,24 @@
 package com.sypark.bus
 
 import android.os.Bundle
-import android.view.LayoutInflater
+import android.util.Log
 import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import com.sypark.bus.base.BaseFragment
+import com.sypark.bus.databinding.FragmentSearchBusBinding
+import com.sypark.bus.viewmodel.SearchViewModel
 
 
-class SearchBusFragment: Fragment() {
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+class SearchBusFragment : BaseFragment<FragmentSearchBusBinding>(R.layout.fragment_search_bus) {
+    private val searchViewModel: SearchViewModel by viewModels()
 
-        return inflater.inflate(R.layout.fragment_search_bus, container, false)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        binding.searchViewModel = searchViewModel
+
+        binding.searchViewModel!!.busNumber.observe(requireActivity()) {
+            Log.e("!!!!", it)
+        }
     }
 }
